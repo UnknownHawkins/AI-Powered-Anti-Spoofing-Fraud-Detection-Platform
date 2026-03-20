@@ -142,7 +142,7 @@ project-root/
 ## ⚙️ Project Setup
 
 ### 🔧 Clone Repository
-git clone https://github.com/your-username/market-crash-defense.git  
+git clone git@github.com:UnknownHawkins/AI-Powered-Anti-Spoofing-Fraud-Detection-Platform.git  
 cd market-crash-defense  
 
 ### 📦 Install Dependencies
