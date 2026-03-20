@@ -99,11 +99,60 @@ Combines:
 
 ## 🏗️ System Architecture
 
-User → Frontend → Backend API → AI Engine → Database  
-                        ↓  
-                Risk Scoring Engine  
-                        ↓  
-                Fraud Detection Engine  
+                    ┌───────────────────────┐
+                    │      User App         │
+                    │ (Delivery Partner)    │
+                    └─────────┬─────────────┘
+                              │
+                              ▼
+                    ┌───────────────────────┐
+                    │      Frontend         │
+                    │   (React / Web UI)   │
+                    └─────────┬─────────────┘
+                              │ API Requests
+                              ▼
+                    ┌───────────────────────┐
+                    │      Backend API      │
+                    │   (Node + Express)   │
+                    └─────────┬─────────────┘
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        ▼                     ▼                     ▼
+┌───────────────┐   ┌──────────────────┐   ┌──────────────────┐
+│ Device & GPS  │   │ Behavioral Engine│   │  Auth System     │
+│ Verification  │   │  (Pattern Track) │   │ (JWT / Firebase) │
+└──────┬────────┘   └────────┬─────────┘   └────────┬─────────┘
+       │                     │                      │
+       └────────────┬────────┴──────────────┬───────┘
+                    ▼                       ▼
+            ┌────────────────────────────────────┐
+            │     Risk Scoring Engine ⚡         │
+            │ (Real-time Fraud Evaluation)      │
+            └──────────────┬────────────────────┘
+                           │
+                           ▼
+            ┌────────────────────────────────────┐
+            │   AI Anomaly Detection 🤖          │
+            │ (ML Models / Pattern Analysis)     │
+            └──────────────┬────────────────────┘
+                           │
+                           ▼
+            ┌────────────────────────────────────┐
+            │     Fraud Detection Engine 🚨      │
+            │ (Spoofing + Fraud Ring Detection) │
+            └──────────────┬────────────────────┘
+                           │
+                           ▼
+            ┌────────────────────────────────────┐
+            │        Database Layer 🗄️          │
+            │ (MongoDB + ChromaDB)              │
+            └────────────────────────────────────┘
+                           │
+                           ▼
+            ┌────────────────────────────────────┐
+            │   Monitoring Dashboard 📡         │
+            │ (Alerts + Fraud Insights)         │
+            └────────────────────────────────────┘
 
 ---
 
@@ -112,9 +161,28 @@ User → Frontend → Backend API → AI Engine → Database
 project-root/
 │
 ├── frontend/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── App.js
+│
 ├── backend/
+│   ├── controllers/
+│   ├── routes/
+│   ├── models/
+│   ├── middleware/
+│   └── server.js
+│
 ├── ai-engine/
+│   ├── models/
+│   ├── training/
+│   ├── anomaly_detection.py
+│
 ├── database/
+│   └── config.js
+│
 ├── README.md
 └── package.json
 
